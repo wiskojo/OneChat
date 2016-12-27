@@ -1,0 +1,43 @@
+.room span
+{
+  height: inherit;
+  width: inherit;
+  overflow: inherit;
+  text-overflow: ellipsis;
+}
+
+.users span
+{
+  padding-right: 5px;
+  overflow: inherit;
+}
+
+.room
+{
+  width: auto;
+  height: 8.33vh;
+  border-style: solid;
+  overflow: hidden;
+}
+
+.users
+{
+  width: auto;
+  height: 8.33vh;
+  border-style: solid;
+  overflow-x: scroll;
+}
+
+.messages
+{
+  width: auto;
+  height: 75vh;
+  border-style: solid;
+  overflow-y: scroll;
+}
+
+.message_form
+{
+  width: auto;
+  height: 8.33vh;
+}
