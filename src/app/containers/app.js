@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {sendMessage as sendMessageAction} from "../actions/send-message"
+import {sendMessage as sendMessageAction} from "../actions/message-actions"
 import '../../resources/stylesheets/style.scss'
 
 import RoomDisplay from "../components/room-display";
@@ -22,7 +22,7 @@ class App extends Component
         <MessageList messages={this.props.messages} />
         <MessageForm
           user={this.props.user}
-          onMessageSubmit={this.props.sendMessageAction}
+          dispatchSendMessageAction={this.props.sendMessageAction}
         />
       </div>
     );
@@ -44,4 +44,4 @@ function matchDispatchToProps(dispatch)
   return bindActionCreators({sendMessageAction: sendMessageAction}, dispatch);
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, matchDispatchToProps)(App);
