@@ -1,4 +1,4 @@
-import {SEND_MESSAGE, RECEIVE_MESSAGE} from "./action-types";
+import {RECEIVE_MESSAGE, SEND_MESSAGE} from "./action-types";
 
 
 export const sendMessage = function(message)
