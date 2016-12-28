@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.20.0",
+    "chrome-native-messaging": "^0.2.0",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "socket.io": "^1.7.2",

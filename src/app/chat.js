@@ -1,12 +1,16 @@
 import io from "socket.io-client";
+import connectExtension from "./local_server";
 
 import * as actions from "./constants/action-types";
 import {receiveMessage} from "./actions/message-actions";
 import {updateUserList} from "./actions/update-user-list";
 import {login} from "./actions/login";
 import {updateRoom} from "./actions/update-room";
+import {changeTab} from "./actions/change-tab";
 
-var socket = null;
+
+var socket      = null;
+var extension   = null;
 
 export function chatMiddleware(store)
 {
@@ -31,31 +35,47 @@ export function chatMiddleware(store)
 
 export default function(store)
 {
-  // TODO Don't forget to change this to an environment variable
-  socket = io.connect("http://localhost:3001");
+  extension = connectExtension(io);
 
-  socket.on("message", function(message)
+  extension.on("extensionConnect", function(tab)
   {
-    store.dispatch(receiveMessage(message));
+    // TODO Don't forget to change this to an environment variable
+    socket = io.connect("http://localhost:3001");
+
+    // TEMPORARY TEMPORARY TEMPORARY TEMPORARY TEMPORARY TEMPORARY
+    socket.on("connect", function()
+    {
+      socket.emit("initConnect", {
+        user: "Anon" + Math.floor(Math.random() * 10000),
+        tab: tab
+      });
+    });
+
+    /* Bind global socket event handlers */
+
+    socket.on("message", function(message)
+    {
+      store.dispatch(receiveMessage(message));
+    });
+
+    socket.on("updateUserList", function(userList)
+    {
+      store.dispatch(updateUserList(userList));
+    });
+
+    socket.on("updateRoom", function(room)
+    {
+      store.dispatch(updateRoom(room));
+    });
+
+    socket.on("updateUserList", function(userList)
+    {
+      store.dispatch(updateUserList(userList));
+    });
   });
 
-  socket.on("updateUserList", function(userList)
+  extension.on("tabChange", function(tab)
   {
-    store.dispatch(updateUserList(userList));
+    store.dispatch(changeTab(tab));
   });
-
-  socket.on("updateRoom", function(room)
-  {
-    store.dispatch(updateRoom(room));
-  });
-
-  socket.on("updateUserList", function(userList)
-  {
-    store.dispatch(updateUserList(userList));
-  });
-
-  // --------- TEMPORARY INITCONNECT IMPLEMENTATION -----------
-  store.dispatch(login({name: "NAME"}));
-  socket.emit("initConnect", {user: store.getState().userProfile.name, room: "ROOM"});
-  // ----------------------------------------------------------
 }

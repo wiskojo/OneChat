@@ -1,7 +1,7 @@
 import {CHANGE_TAB} from "../constants/action-types";
 
 
-const initialState = "/";
+const initialState = "";
 export default function(state = initialState, action)
 {
   switch(action.type)

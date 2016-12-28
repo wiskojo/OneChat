@@ -1,0 +1,18 @@
+{
+  "name": "OneExtension",
+  "description": "Chrome extension for OneChat app",
+  "version": "0.0.0.1",
+  "manifest_version": 2,
+
+  "background": {
+    "scripts": ["resource/socket.io.js", "app.js"]
+  },
+
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "tabs"
+  ],
+
+  "content_security_policy": "script-src 'self' https://cdn.socket.io/socket.io-1.4.5.js; object-src 'self'"
+}

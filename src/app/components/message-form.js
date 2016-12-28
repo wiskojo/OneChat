@@ -16,12 +16,8 @@ export default class MessageForm extends Component
 
   sendMessage()
   {
-    var message = {
-      user: this.props.user,
-      text: this.state.text
-    }
+    this.props.dispatchSendMessageAction(this.state.text);
     this.setState({text: ""});
-    this.props.dispatchSendMessageAction(message);
   }
 
   render()

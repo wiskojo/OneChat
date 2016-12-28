@@ -1,8 +1,8 @@
-var app  = require('express')();
-var http = require('http').Server(app);
-var io   = require('socket.io')(http);
+const app  = require('express')();
+const http = require('http').Server(app);
+const io   = require('socket.io')(http);
 
-var port = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 
 http.listen(port, function()
 {
@@ -15,7 +15,7 @@ io.on("connection", function(socket)
   socket.on("initConnect", function(userData)
   {
     socket.user = userData.user;
-    socket.room = userData.room;
+    socket.room = userData.tab.url;
 
     socket.join(socket.room);
     console.log("Socket connected: " + socket.user + " in room " + socket.room);
@@ -34,11 +34,15 @@ io.on("connection", function(socket)
 
   socket.on("message", function(message)
   {
-    // Emit message from socket to every client in the socket's
-    // room(including the socket itself)
-    io.to(socket.room).emit("message", message);
-    console.log("Message by " + socket.user + " in room "
-      + socket.room + ": " + message.text);
+    // Don't broadcast empty messages
+    if(message !== "")
+    {
+      // Emit message from socket to every client in the socket's
+      // room(including the socket itself)
+      io.to(socket.room).emit("message", {user: socket.user, text: message});
+      console.log("Message by " + socket.user + " in room "
+        + socket.room + ": " + message);
+    }
   });
 
   socket.on("changeTab", function(tab)
@@ -51,12 +55,12 @@ io.on("connection", function(socket)
     socket.join(socket.room);
 
     // Room update event emitted to socket to update its state.room
-    socket.emit("room-update", socket.room);
+    socket.emit("updateRoom", socket.room);
     console.log("Room update of socket " + socket.user + " to " + socket.room);
     // Update userlist event fired to clients in the socket's
     // previous and current room
-    updateUserlist(prevRoom);
-    updateUserlist(socket.room);
+    updateUserList(prevRoom);
+    updateUserList(socket.room);
   });
 });
 

@@ -21,7 +21,6 @@ class App extends Component
         <UserList users={this.props.users} />
         <MessageList messages={this.props.messages} />
         <MessageForm
-          user={this.props.user}
           dispatchSendMessageAction={this.props.sendMessageAction}
         />
       </div>
