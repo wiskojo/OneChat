@@ -1,10 +1,11 @@
 import * as actions from "./actions/action-types";
 import {receiveMessage} from "./actions/message-actions";
 import {updateUserList} from "./actions/update-user-list";
+import {login} from "./actions/login";
 import {updateRoom} from "./actions/update-room";
 import io from "socket.io-client";
 
-const socket = null;
+var socket = null;
 
 export function chatMiddleware(store)
 {
@@ -29,7 +30,8 @@ export function chatMiddleware(store)
 
 export default function(store)
 {
-  socket = io.connect();
+  // TODO Don't forget to change this to environment variables
+  socket = io.connect("http://localhost:3001");
 
   socket.on("message", function(message)
   {
@@ -50,4 +52,9 @@ export default function(store)
   {
     store.dispatch(updateUserList(userList));
   });
+
+  // --------- TEMPORARY INITCONNECT IMPLEMENTATION -----------
+  store.dispatch(login({name: "NAME"}));
+  socket.emit("initConnect", {user: store.getState().userProfile.name, room: "ROOM"});
+  // ----------------------------------------------------------
 }

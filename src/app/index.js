@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
 import {createStore, applyMiddleware} from "redux";
 import allReducers from "./reducers";
-import startChat, {chatMiddleware} from "chat";
+import startChat, {chatMiddleware} from "./chat";
 
 import App from "./containers/app";
 
