@@ -1,4 +1,4 @@
-import {UPDATE_ROOM} from "../actions/action-types";
+import {UPDATE_ROOM} from "../constants/action-types";
 
 
 export const updateRoom = function(room)

@@ -1,10 +1,9 @@
-import {LOGIN} from "../actions/action-types";
+import {LOGIN} from "../constants/action-types";
 
 
 const initialState = {
   name: ""
 };
-
 export default function(state = initialState, action)
 {
   switch(action.type)

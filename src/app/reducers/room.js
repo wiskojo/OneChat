@@ -1,13 +1,12 @@
-import {CHANGE_TAB} from "../actions/action-types";
+import {UPDATE_ROOM} from "../constants/action-types";
 
 
 const initialState = "/";
-
 export default function(state = initialState, action)
 {
   switch(action.type)
   {
-    case CHANGE_TAB:
+    case UPDATE_ROOM:
       return action.payload;
       break;
   }

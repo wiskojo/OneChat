@@ -1,4 +1,4 @@
-import {LOGIN} from "./action-types";
+import {LOGIN} from "../constants/action-types";
 
 
 export const login = function(userProfile)

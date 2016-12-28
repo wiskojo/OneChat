@@ -1,8 +1,8 @@
 import {combineReducers} from "redux";
-import UsersReducer from "./reducer-users";
-import UserProfileReducer from "./reducer-user-profile";
-import MessagesReducer from "./reducer-messages";
-import RoomReducer from "./reducer-room";
+import UsersReducer from "./users";
+import UserProfileReducer from "./user-profile";
+import MessagesReducer from "./messages";
+import RoomReducer from "./room";
 
 
 const allReducers = combineReducers({

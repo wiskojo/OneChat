@@ -1,13 +1,12 @@
-import {UPDATE_ROOM} from "../actions/action-types";
+import {UPDATE_USER_LIST} from "../constants/action-types";
 
 
-const initialState = "/";
-
+const initialState = [];
 export default function(state = initialState, action)
 {
   switch(action.type)
   {
-    case UPDATE_ROOM:
+    case UPDATE_USER_LIST:
       return action.payload;
       break;
   }

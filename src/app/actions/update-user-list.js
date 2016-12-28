@@ -1,4 +1,4 @@
-import {UPDATE_USER_LIST} from "../actions/action-types";
+import {UPDATE_USER_LIST} from "../constants/action-types";
 
 
 export const updateUserList = function(userList)

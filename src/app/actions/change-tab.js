@@ -1,4 +1,4 @@
-import {CHANGE_TAB} from "../actions/action-types";
+import {CHANGE_TAB} from "../constants/action-types";
 
 
 export const changeTab = function(tab)

@@ -1,9 +1,10 @@
-import * as actions from "./actions/action-types";
+import io from "socket.io-client";
+
+import * as actions from "./constants/action-types";
 import {receiveMessage} from "./actions/message-actions";
 import {updateUserList} from "./actions/update-user-list";
 import {login} from "./actions/login";
 import {updateRoom} from "./actions/update-room";
-import io from "socket.io-client";
 
 var socket = null;
 
@@ -30,7 +31,7 @@ export function chatMiddleware(store)
 
 export default function(store)
 {
-  // TODO Don't forget to change this to environment variables
+  // TODO Don't forget to change this to an environment variable
   socket = io.connect("http://localhost:3001");
 
   socket.on("message", function(message)
