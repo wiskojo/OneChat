@@ -9,8 +9,8 @@ import {updateRoom} from "./actions/update-room";
 import {changeTab} from "./actions/change-tab";
 
 
-var socket      = null;
-var extension   = null;
+var socket    = null;
+var extension = null;
 
 export function chatMiddleware(store)
 {
@@ -41,8 +41,9 @@ export default function(store)
   {
     // TODO Don't forget to change this to an environment variable
     socket = io.connect("http://localhost:3001");
+    // socket = io.connect("http://oneserver-94601.onmodulus.net/");
 
-    // TEMPORARY TEMPORARY TEMPORARY TEMPORARY TEMPORARY TEMPORARY
+    // --------------- Temporary implementation of initConnect ---------------
     socket.on("connect", function()
     {
       socket.emit("initConnect", {
@@ -50,6 +51,7 @@ export default function(store)
         tab: tab
       });
     });
+    // -----------------------------------------------------------------------
 
     /* Bind global socket event handlers */
 

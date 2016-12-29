@@ -3,8 +3,10 @@ import * as childProcess from "child_process";
 export default function(io)
 {
   // Spawn local server as a child process
-  var localServerProcess = childProcess.spawn("node.exe",
-    ["./src/app/local_server/server.js"]);
+  var localServerProcess = childProcess.spawn("./resources/app/dist/local_server/node.exe",
+    ["./resources/app/dist/local_server/server.js"]);
+  // var localServerProcess = childProcess.spawn("./dist/local_server/node.exe",
+  //   ["./dist/local_server/server.js"])
 
   // Log local server stdout and stderr to client console
   localServerProcess.stdout.on("data", function(data)
